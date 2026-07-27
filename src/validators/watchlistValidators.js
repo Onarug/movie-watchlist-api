@@ -9,10 +9,10 @@ const addToWatchlistSchema = z.object({
         "DROPPED"
     ], {
         error : () => {
-            message : "Staus not the correct enum"
+            message : "Status not the correct enum"
         }
     }).optional(),
-    rating : z.coerce.number().int("Rating must be an interger").min(1).max(10).optional(),
+    rating : z.coerce.number().int("Rating must be an integer").min(1).max(10).optional(),
     notes: z.string().optional()
 });
 
