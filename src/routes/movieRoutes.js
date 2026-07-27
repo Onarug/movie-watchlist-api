@@ -1,22 +1,14 @@
 import express from 'express'
-
+import { addToMovieDB } from '../controllers/movieController.js';
+import { authMiddleware } from '../middleware/authMiddleware.js';
+import { validateRequest } from '../middleware/validateRequest.js';
+import { addToMovieDBSchema } from '../validators/movieValidators.js';
 const router = express.Router()
 
-router.get("/",(req,res)=>{
-    res.json({httpMethod: "get"});
-});
+router.use(authMiddleware)
 
-router.post("/",(req,res)=>{
-    res.json({httpMethod: "post"});
-});
+router.post("/", validateRequest(addToMovieDBSchema),addToMovieDB );
 
-router.put("/",(req,res)=>{
-    res.json({httpMethod: "put"});
-});
-
-router.delete("/",(req,res)=>{
-    res.json({httpMethod: "delete"});
-});
 export default router;
 
 
