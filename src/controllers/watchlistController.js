@@ -117,4 +117,23 @@ const updateWatchlist = async (req,res) => {
 
 }
 
-export {addToWatchlist,removeFromWatchList,updateWatchlist}
+const getWatchlist = async(req,res) => {
+    try {
+        const watchlist = await prisma.watchlistItem.findMany({
+            where : {
+                userId : req.user.id
+            }
+        })
+        return res.status(200).json({
+            status : {watchlist}
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message : `Error: ${error}`
+        });
+    }
+
+
+}
+
+export {addToWatchlist,removeFromWatchList,updateWatchlist,getWatchlist}

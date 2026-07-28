@@ -1,5 +1,5 @@
 import express from 'express'
-import { addToWatchlist, removeFromWatchList, updateWatchlist } from '../controllers/watchlistController.js';
+import { addToWatchlist, removeFromWatchList, updateWatchlist, getWatchlist } from '../controllers/watchlistController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { validateRequest } from '../middleware/validateRequest.js';
 import { addToWatchlistSchema, updateWatchlistSchema } from '../validators/watchlistValidators.js';
@@ -13,6 +13,7 @@ router.delete("/:id",removeFromWatchList);
 
 router.put("/:id", validateRequest(updateWatchlistSchema),updateWatchlist);
 
+router.get("/", getWatchlist);
 
 
 export default router;
